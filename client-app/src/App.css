@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background: white; 
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: dodgerblue;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(210 82 26);  
+}
+
+.blink {
+  animation: blink-animation 1s steps(5, start) infinite;
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+  body {
+    font: 14px "Century Gothic", Futura, sans-serif;
+    margin: 0 auto;
+    background:rgb(243, 243, 243);
+    color:#000;
+  }
+
+  .heading{
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAHlBMVEUAAABkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGSH0mEbAAAACnRSTlMAzDPDPPPYnGMw2CgMzQAAAChJREFUKM9jgAPOAgZMwGIwKkhXQSUY0BCCMxkEYUAsEM4cjI4fwYIAf2QMNbUsZjcAAAAASUVORK5CYII=');
+    background-size: 15px;
+  }
+
+  .outline {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 5px solid white;
+  }
+
+  table{
+    border-collapse: collapse;
+    background:rgb(254, 254, 254);
+  }
+  
+  table, tr, td{
+    border: thin solid dodgerblue
+  }
+  
+  .cell{
+    position:relative;
+    height:30px;
+    width:30px;
+    background:rgb(254, 254, 254);
+    border-radius: 50%;
+  }
+
+ .cell.two-children{
+    animation: rescale 16s infinite; 
+    animation-delay: 0.5s;
+  }
+
+  .cell.three-children{
+    animation: rescale 10s infinite;
+    animation-delay: 0.5s; 
+  } 
+
+  .cell.active{
+    animation: none;
+  }
+
+  .disable-board{
+    pointer-events: none;
+  }
+
+  @keyframes rescale{
+    100% { 
+      -webkit-transform: rotate(360deg); 
+      transform:rotate(360deg); 
+    }
+  }
+  
+  .ball{
+    position:absolute;
+    height:13px;
+    width:13px;
+    border-radius:50%;
+    mix-blend-mode: darken;
+    transition: left 0.5s, top 0.5s, right 0.5s, bottom 0.5s;
+    transition-timing-function: linear;
+    z-index:2;
+  }
+  
+  .cell > .ball:nth-child(1){
+    left: 5px;
+    top: 5px;
+  }
+  
+  .cell > .ball:nth-child(2){
+    left: 15px;
+    top: 5px;
+  }
+  
+  .cell > .ball:nth-child(3){
+    left: 10px;
+    top: 15px;
+  }
+  
+  .cell > .ball:nth-child(4){
+    left: 15px;
+    top: 15px;
+  }
+  
+  /* Corner Cells */
+  tr:first-child td:first-child > .cell.active > .ball:nth-child(1){
+    left: calc(5px + 32px);
+  }
+  tr:first-child td:first-child > .cell.active > .ball:nth-child(2){
+    top: calc(5px + 32px);
+  }
+  tr:first-child td:last-child > .cell.active > .ball:nth-child(1){
+    left: calc(5px - 32px);
+  }
+  tr:first-child td:last-child > .cell.active > .ball:nth-child(2){
+    top: calc(5px + 32px);
+  }
+  tr:last-child td:first-child > .cell.active > .ball:nth-child(1){
+    top: calc(5px - 32px);
+  }
+  tr:last-child td:first-child > .cell.active > .ball:nth-child(2){
+    left: calc(5px + 32px);
+  }
+  tr:last-child td:last-child > .cell.active > .ball:nth-child(1){
+    top: calc(5px - 32px);
+  }
+  tr:last-child td:last-child > .cell.active > .ball:nth-child(2){
+    left: calc(5px - 32px);
+  }
+  
+  /* last row side cells without corner cells */
+  tr:last-child > td:not(:first-child):not(:last-child) > .cell.active > .ball:nth-child(1){
+    top: calc(5px - 32px);
+  }
+  
+  tr:last-child > td:not(:first-child):not(:last-child) > .cell.active > .ball:nth-child(2){
+    left: calc(5px - 32px);
+  }
+  tr:last-child > td:not(:first-child):not(:last-child) > .cell.active > .ball:nth-child(3){
+    left: calc(5px + 32px);
+  }
+  
+  /* first row side cells without corner cells */
+  tr:first-child  > :not(td:first-child):not(td:last-child) > .cell.active > .ball:nth-child(1){
+    top: calc(5px + 32px);
+  }
+  tr:first-child  > :not(td:first-child):not(td:last-child) > .cell.active > .ball:nth-child(2){
+    left: calc(5px - 32px);
+  }
+  tr:first-child  > :not(td:first-child):not(td:last-child) > .cell.active > .ball:nth-child(3){
+    left: calc(5px + 32px);
+  }
+  
+  /* left side cells without corner cells */
+  tr:not(tr:first-child):not(tr:last-child)>td:first-child > .cell.active > .ball:nth-child(1){
+    left: calc(5px + 32px);
+  }
+  tr:not(tr:first-child):not(tr:last-child)>td:first-child > .cell.active > .ball:nth-child(2){
+    top: calc(5px - 32px);
+  }
+  tr:not(tr:first-child):not(tr:last-child)>td:first-child > .cell.active > .ball:nth-child(3){
+    top: calc(5px + 32px);
+  }
+  
+  /* right side cells without corner cells */
+  tr:not(tr:first-child):not(tr:last-child)>td:last-child > .cell.active > .ball:nth-child(1){
+    left: calc(5px - 32px);
+  }
+  tr:not(tr:first-child):not(tr:last-child)>td:last-child > .cell.active > .ball:nth-child(2){
+    top: calc(5px - 32px);
+  }
+  tr:not(tr:first-child):not(tr:last-child)>td:last-child > .cell.active > .ball:nth-child(3){
+    top: calc(5px + 32px);
+  }
+  
+  /* middle cells */
+  tr:not(:first-child):not(:last-child)>td:not(:first-child):not(:last-child) > .cell.active > .ball:nth-child(1){
+    top: calc(5px - 32px);
+  }
+  tr:not(:first-child):not(:last-child)>td:not(:first-child):not(:last-child) > .cell.active > .ball:nth-child(2){
+    left: calc(5px + 32px);
+  }
+  tr:not(:first-child):not(:last-child)>td:not(:first-child):not(:last-child) > .cell.active > .ball:nth-child(3){
+    top: calc(5px + 32px);
+  }
+  tr:not(:first-child):not(:last-child)>td:not(:first-child):not(:last-child) > .cell.active > .ball:nth-child(4){
+    left: calc(5px - 32px);
+  }
+  
