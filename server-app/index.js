@@ -10,6 +10,8 @@ const io = require('socket.io')(server, {
       credentials: true
     }
   });
+  
+app.use('/', (req, res) => res.send('Hello World!!!'));
 
 let rooms = [];
 let roomDetails = [];
