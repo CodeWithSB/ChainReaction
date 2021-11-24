@@ -6,7 +6,7 @@ import PlayersList from "./PlayersList";
 import PlayerDetails from "./PlayerDetails";
 import Board from "./Board";
 
-//const ENDPOINT = "http://localhost:4002";
+const {REACT_APP_SERVER_ENDPOINT} = process.env;
 
 const intializeBoard = (rows, columns) => {
 	let board = new Array(rows);
@@ -72,7 +72,7 @@ export default function Game({
 	const [numOfCols, setNumOfCols] = useState(columns);
 
 	useEffect(() => {
-		socket = socketIOClient(); // in local you can mention ENDPOINT as parameter
+		socket = socketIOClient(REACT_APP_SERVER_ENDPOINT); 
 		socket.emit("join-room", startType, gameName, newPlayer, rows, columns);
 
 		socket.on("board-setup", (roomDetails) => {
