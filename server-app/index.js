@@ -1,3 +1,5 @@
+const cors = require('cors');
+
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 4002;
@@ -10,7 +12,7 @@ const io = require('socket.io')(server, {
       credentials: true
     }
   });
-  
+
 app.use(cors());
 
 app.use('/', (req, res) => res.send('Hello World!!!'));
