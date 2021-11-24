@@ -1,10 +1,10 @@
 const express = require('express')
 const app = express()
-const port = 4002
-var server = require('http').createServer(app);
+const port = process.env.PORT || 4002;
+const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
     cors: {
-      origin: ['http://localhost:8090'],
+      origin: [process.env.CLIENT_URL],
       methods: ["GET", "POST"],
       transports : ['websocket'],
       credentials: true
